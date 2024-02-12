@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import About from "./pages/About";
 const App=()=> {
   
 
@@ -15,7 +16,7 @@ const App=()=> {
       <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<Home/>}/>
+        <Route path="/about" element={<About/>}/>
         <Route path="/blog" element={<Blog/>}/>
         <Route path="/contact" element={<Contact/>}/>
         <Route path="/login" element={<Login/>}/>
