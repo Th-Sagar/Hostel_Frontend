@@ -9,19 +9,19 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  overflow: hidden;
+ 
   
 }
 
 .container{
-  @apply  max-w-screen-2xl  mx-auto px-10 lg:px-0 ;
+  @apply  max-w-screen-2xl  mx-auto px-10 lg:px-0  overflow-hidden;
 }
 
 .pointer{
   @apply hover:cursor-pointer;
 }
 
-.shadow{
+.shadowin{
   @apply hover:shadow-inner transition-all ease-in duration-200;
 }
 .search{

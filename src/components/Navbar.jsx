@@ -7,7 +7,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <>
-      <section className="container  py-4 sticky top-0 w-full bg-white z-50">
+      <section className="container  py-4 sticky top-0  bg-white z-50 border rounded-lg shadow-lg">
         <main className="flex justify-between">
           <div className="p-2">
 
@@ -16,7 +16,7 @@ const Navbar = () => {
             </NavLink>
           </div>
 
-          <div className="border rounded-3xl flex p-1 shadow ">
+          <div className="border rounded-3xl flex p-1 shadowin ">
             <input
               className="pl-4 outline-none"
               type="text"
@@ -40,11 +40,11 @@ const Navbar = () => {
                 </NavLink></li>
             </ul>
             <ul className="flex gap-2">
-              <li className="font-semibold border p-2 rounded-xl shadow pointer">
+              <li className="font-semibold border p-2 rounded-xl shadowin pointer">
                 Host your hostel
               </li>
-              <li className="p-2 rounded-xl shadow pointer">
-                <div className="flex gap-2 p-2">
+              <li className="p-2 rounded-xl shadowin pointer">
+                <div className="flex gap-2 p-2 ">
                   <IoMdPerson />
                   <RxHamburgerMenu />
                 </div>
