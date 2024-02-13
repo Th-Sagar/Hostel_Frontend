@@ -26,8 +26,10 @@ const Home = () => {
                 Are you a hostel owner? Host your hostel and Provide a place for
                 students.
               </p>
-              <Button/>
-             
+              <Button
+                width={"w-1/2"}
+                bg={" bg-white text-black   hover:bg-black hover:text-white"}
+              />
             </div>
 
             <div className="md:w-2/3 rounded-2xl">

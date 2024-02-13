@@ -1,8 +1,8 @@
 import React from 'react'
 
-const Button = () => {
+const Button = ({width,bg}) => {
   return (
-    <button className=" mt-5  border w-1/2 bg-white text-black p-2 rounded-lg hover:bg-black hover:text-white transition-all ease-out duration-500">
+    <button className={` mt-5 ${width}  border  p-2 rounded-lg ${bg} transition-all ease-out duration-500`}>
     Learn More
   </button>
   )
