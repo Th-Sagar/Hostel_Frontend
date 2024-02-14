@@ -90,7 +90,7 @@ const Navbar = () => {
                       </li>
                       <br />
 
-                      <li className="dropdown">Host your hostel</li>
+                      <li className="dropdown" onClick={handleRegister}>Host your hostel</li>
 
                       <li className="pt-2 dropdown">Help</li>
                     </ul>
