@@ -3,17 +3,21 @@ import { useFormik } from 'formik'
 import { signInSchema } from '../Schemas/loginSchemas'
 import Button from './Button'
 import { RxCrossCircled } from 'react-icons/rx'
+import { useDispatch } from 'react-redux'
+import {createUser} from '../features/UserDetailSlice'
 
 const Login = ({handleCross,handleRegister}) => {
   const initialValues={
     email:"",
     password:""
   }
+  const dispatch = useDispatch();
   const {values,errors,handleBur,handleChange,handleSubmit,touched}= useFormik({
     initialValues,
     validationSchema:signInSchema,
     onSubmit:(values,action)=>{
-      console.log(values)
+      
+      dispatch(createUser(values))
       action.resetForm()
     }
   })
