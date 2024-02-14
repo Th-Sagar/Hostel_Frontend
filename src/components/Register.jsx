@@ -2,7 +2,7 @@ import React from "react";
 import Button from "./Button";
 import { RxCrossCircled } from "react-icons/rx";
 
-const Register = ({ handleHost,handleLogin }) => {
+const Register = ({handleCross, handleLogin }) => {
   return (
     <section className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600 bg-opacity-30  ">
       <div className="container flex justify-center items-center w-full">
@@ -11,7 +11,7 @@ const Register = ({ handleHost,handleLogin }) => {
             <RxCrossCircled
               size={20}
               className="hover:scale-110 transition-all ease-in duration-300"
-              onClick={handleHost}
+              onClick={handleCross}
             />
           </div>
           <div className=" md:w-1/3 hidden md:flex  ">

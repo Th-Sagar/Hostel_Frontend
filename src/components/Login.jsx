@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from './Button'
 import { RxCrossCircled } from 'react-icons/rx'
 
-const Login = ({handleHost,handleRegister}) => {
+const Login = ({handleCross,handleRegister}) => {
  
   return (
     <section className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600 bg-opacity-30  ">
@@ -12,7 +12,7 @@ const Login = ({handleHost,handleRegister}) => {
           <RxCrossCircled
             size={20}
             className="hover:scale-110 transition-all ease-in duration-300"
-            onClick={handleHost}
+            onClick={handleCross}
           />
         </div>
         <div className=" md:w-1/3 hidden md:flex  ">

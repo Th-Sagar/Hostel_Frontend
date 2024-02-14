@@ -7,27 +7,30 @@ import Login from "./Login";
 import Register from "./Register";
 
 const Navbar = () => {
-  const [host, setHost] = useState(false);
+
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
-  const handleHost = () => {
-    setHost(!host);
-    setLogin(false);
-    setRegister(false); 
-  };
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const handleLogin = () => {
-    setHost(false);
     setLogin(!login);
     setRegister(false);
   };
   const handleRegister = () => {
     setRegister(!register);
     setLogin(false);
-    setHost(false);
   };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
+  };
+  const handleCross=()=>{
+    setLogin(false);
+    setRegister(false);
+  }
   return (
     <>
-      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg shadow-lg ">
+      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
         <main className="flex justify-between">
           <div className="p-2">
             <NavLink className="pointer" to="/">
@@ -61,26 +64,49 @@ const Navbar = () => {
             <ul className="flex gap-2">
               <li
                 className="font-semibold border p-2 rounded-xl shadowin pointer"
-                onClick={handleHost}
+                onClick={handleLogin}
               >
                 Host your hostel
               </li>
-              <li className="p-2 rounded-xl shadowin pointer">
+              <li
+                className="p-2 rounded-xl shadowin pointer"
+                onClick={toggleDropdown}
+              >
                 <div className="flex gap-2 p-2 ">
                   <IoMdPerson />
                   <RxHamburgerMenu />
                 </div>
+                {dropdownOpen && (
+                  <div
+                    className="fixed inset-0 top-24  left-[90%] lg:left-[92.27%] 
+                  xl:left-[93.4%] text-center 2xl:left-[88.3%] w-32 lg:w-32 2xl:w-36 h-48 md:left-[87%] bg-white border rounded-xl shadow-lg"
+                  >
+                    <ul className="mt-4">
+                      <li className="dropdown" onClick={handleRegister}>
+                        Sign up
+                      </li>
+                      <li className="pt-2 dropdown" onClick={handleLogin}>
+                        Sign in
+                      </li>
+                      <br />
+
+                      <li className="dropdown">Host your hostel</li>
+
+                      <li className="pt-2 dropdown">Help</li>
+                    </ul>
+                  </div>
+                )}
               </li>
             </ul>
           </div>
         </main>
       </section>
-      {host && !register && (
-        <Login handleRegister={handleRegister} handleHost={handleHost} />
-      ) }
-      {host && register && (
-        <Register handleLogin={handleLogin} handleHost={handleHost} />
-      ) }
+      { login && (
+        <Login handleCross={handleCross} handleRegister={handleRegister} />
+      )}
+      {register && (
+        <Register handleCross={handleCross}  handleLogin={handleLogin} />
+      )}
     </>
   );
 };

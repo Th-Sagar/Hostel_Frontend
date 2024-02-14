@@ -7,7 +7,7 @@ import Button from "../components/Button";
 const Home = () => {
   return (
     <>
-      <header className="container mt-5">
+      <header className="container mt-5 ">
         <Banner />
 
         <section className="mt-20">
