@@ -1,8 +1,66 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Hostel Management Frontend
 
-Currently, two official plugins are available:
+Hostel Management is app where we can find or add hostel in the page.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+## Features
+
+- Login and Register user
+- Create, Read, Update, Delete data from the server
+- Search Hostel according to the places as well as names
+- Live previews
+- Fullscreen mode
+- Cross platform
+
+
+
+## Tech Stack
+
+**Client:**
+- Vite
+- Redux
+- TailwindCSS
+- Formik
+- Yup
+- React router
+- React icon
+
+**Server:** 
+- Node
+- Express
+- Nodemon
+- Nodemailer
+- Zod
+- Multer
+- Mongoose
+- Mongoose
+- Bcrypt
+
+
+## Run Locally
+
+Clone the project
+
+```bash
+  git clone https://github.com/Th-Sagar/Hostel_Frontend.git
+```
+
+Go to the project directory
+
+```bash
+  cd Hostel_Frontend
+```
+
+Install dependencies
+
+```bash
+  npm i
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
