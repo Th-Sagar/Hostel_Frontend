@@ -45,7 +45,7 @@ export const registerUser = createAsyncThunk(
 );
 
 const initialState = {
-  token: null, 
+  token: localStorage.getItem("token") || null, 
   loading: false,
   error: null,
 };

@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaSearchLocation } from "react-icons/fa";
 import { IoMdPerson } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
+import { useSelector } from "react-redux";
+import RegisterHostel from "./RegisterHostel";
 
 const Navbar = () => {
-
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [detailHostel, setDetailHostel] = useState(false);
+
+  const { token,loading } = useSelector((state) => state.userDetail);
+ 
 
   const handleLogin = () => {
     setLogin(!login);
@@ -24,10 +29,29 @@ const Navbar = () => {
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
-  const handleCross=()=>{
+  const handleCross = () => {
     setLogin(false);
     setRegister(false);
+  };
+
+  const handleHostel = () => {
+    setDetailHostel(!detailHostel);
+  };
+
+  const handleLogout=()=>{
+    localStorage.removeItem("token");
+    window.location.reload();
+    
+  
   }
+  if(loading){
+    return <h1>Loading...</h1>
+  }
+
+  const setToken = !!token;
+
+  console.log(setToken);
+
   return (
     <>
       <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
@@ -62,12 +86,21 @@ const Navbar = () => {
               </li>
             </ul>
             <ul className="flex gap-2">
-              <li
-                className="font-semibold border p-2 rounded-xl shadowin pointer"
-                onClick={handleLogin}
-              >
-                Host your hostel
-              </li>
+              {setToken ? (
+                <li
+                  className="font-semibold border p-2 rounded-xl shadowin pointer"
+                  onClick={handleHostel}
+                >
+                  Host your hostel
+                </li>
+              ) : (
+                <li
+                  className="font-semibold border p-2 rounded-xl shadowin pointer"
+                  onClick={handleLogin}
+                >
+                  Host your hostel
+                </li>
+              )}
               <li
                 className="p-2 rounded-xl shadowin pointer"
                 onClick={toggleDropdown}
@@ -78,21 +111,40 @@ const Navbar = () => {
                 </div>
                 {dropdownOpen && (
                   <div
-                    className="fixed inset-0 top-24  left-[90%] lg:left-[92.27%] 
-                  xl:left-[93.4%] text-center 2xl:left-[88.3%] w-32 lg:w-32 2xl:w-36 h-48 md:left-[87%] bg-white border rounded-xl shadow-lg"
+                    className={`fixed inset-0 top-24  left-[90%] lg:left-[92.27%] 
+                    xl:left-[93.4%] text-center 2xl:left-[88.3%] w-32 lg:w-32 2xl:w-36 ${
+                      setToken ? "h-1/6" : "h-1/5"
+                    } md:left-[87%] bg-white border rounded-xl shadow-lg`}
                   >
-                    <ul className="mt-4">
-                      <li className="dropdown" onClick={handleRegister}>
-                        Sign up
-                      </li>
-                      <li className="pt-2 dropdown" onClick={handleLogin}>
-                        Sign in
-                      </li>
-                      <br />
+                    <ul className="my-2">
+                      {setToken ? (
+                        <>
+                        <li className="dropdown p-3" onClick={handleLogout}>Logout</li>
+                        <br />
 
-                      <li className="dropdown" onClick={handleRegister}>Host your hostel</li>
+                        <li className="dropdown p-3" onClick={handleHostel}>
+                          Host your hostel
+                        </li>
+                        
+                        </>
+                      ) : (
+                        <>
+                          <li className="dropdown p-3" onClick={handleRegister}>
+                            Sign up
+                          </li>
+                          <li className="p-3 dropdown" onClick={handleLogin}>
+                            Sign in
+                          </li>
+                          <br />
 
-                      <li className="pt-2 dropdown">Help</li>
+                          <li className="dropdown p-3" onClick={handleRegister}>
+                            Host your hostel
+                          </li>
+                        </>
+                      )}
+                     
+
+                      <li className="dropdown p-3">Help</li>
                     </ul>
                   </div>
                 )}
@@ -101,12 +153,14 @@ const Navbar = () => {
           </div>
         </main>
       </section>
-      { login && (
+      {login && !setToken && (
         <Login handleCross={handleCross} handleRegister={handleRegister} />
       )}
-      {register && (
-        <Register handleCross={handleCross}  handleLogin={handleLogin} />
+      {register && !setToken && (
+        <Register handleCross={handleCross} handleLogin={handleLogin} />
       )}
+
+      {detailHostel && <RegisterHostel handleHostel={handleHostel} />}
     </>
   );
 };
