@@ -1,10 +1,13 @@
-import React from 'react'
+/* eslint-disable */
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik'
 import { signInSchema } from '../Schemas/loginSchemas'
 import Button from './Button'
 import { RxCrossCircled } from 'react-icons/rx'
-import { useDispatch } from 'react-redux'
-import {createUser} from '../features/UserDetailSlice'
+import { useDispatch, useSelector } from 'react-redux'
+import {loginUser} from '../features/UserDetailSlice.jsx'
+
+
 
 const Login = ({handleCross,handleRegister}) => {
   const initialValues={
@@ -17,10 +20,26 @@ const Login = ({handleCross,handleRegister}) => {
     validationSchema:signInSchema,
     onSubmit:(values,action)=>{
       
-      dispatch(createUser(values))
+      dispatch(loginUser(values))
       action.resetForm()
     }
   })
+  const {token}=useSelector(state=>state.userDetail)
+  console.log("token",token)
+
+  useEffect(() => {
+    if (!!token) {
+      handleCross()
+      
+    }
+  }, [token, handleCross])
+ 
+
+  
+
+
+
+ 
  
  
   return (
@@ -44,7 +63,7 @@ const Login = ({handleCross,handleRegister}) => {
         </div>
         <div className="w-full md:w-2/3 flex justify-center items-center flex-col ">
           <h2 className=" font-bold text-2xl mb-10">Sign in</h2>
-          <form onSubmit={handleSubmit}>
+          <form id='login' onSubmit={handleSubmit}>
             <div className="flex flex-col">
               <label className="pt-2 font-bold">
                 Email
@@ -54,6 +73,7 @@ const Login = ({handleCross,handleRegister}) => {
                 className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                 placeholder="Email "
                 name="email"
+                id='email'
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBur}
@@ -74,6 +94,7 @@ const Login = ({handleCross,handleRegister}) => {
               </label>
               <input
                 type="password"
+                id='password'
                 className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                 placeholder="Password "
                 name="password"

@@ -3,25 +3,29 @@ import Button from "./Button";
 import { RxCrossCircled } from "react-icons/rx";
 import { signUpSchema } from "../Schemas/registerSchemas";
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../features/UserDetailSlice.jsx";
 
 const Register = ({ handleCross, handleLogin }) => {
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    firstname: "",
+    lastname: "",
     email: "",
     password: "",
   };
+  const dispatch = useDispatch();
 
-  const {values,errors,handleBur,handleChange,handleSubmit,touched}= useFormik({
-    initialValues,
-    validationSchema:signUpSchema,
-    onSubmit:(values,action)=>{
-      console.log(values)
-      action.resetForm()
-    }
+  const { values, errors, handleBur, handleChange, handleSubmit, touched } =
+    useFormik({
+      initialValues,
+      validationSchema: signUpSchema,
+      onSubmit: (values, action) => {
+        
+        dispatch(registerUser(values));
+        action.resetForm();
+      },
+    });
 
-  })
-  console.log(errors)
   return (
     <section className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600 bg-opacity-30  ">
       <div className="container flex justify-center items-center w-full">
@@ -43,25 +47,22 @@ const Register = ({ handleCross, handleLogin }) => {
           </div>
           <div className="w-full md:w-2/3 flex justify-center items-center flex-col ">
             <h2 className=" font-bold text-2xl mb-10">Sign Up</h2>
-            <form onSubmit={handleSubmit}>
+            <form id="register" onSubmit={handleSubmit}>
               <div className="flex flex-col">
                 <label className="pt-2 font-bold">First Name</label>
                 <input
                   type="text"
                   className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                   placeholder="First Name "
-                  name="firstName"
-                  value={values.firstName}
+                  name="firstname"
+                  id='firstname'
+                  value={values.firstname}
                   onChange={handleChange}
                   onBlur={handleBur}
                 />
-                {
-                  errors.firstName && touched.firstName ?(
-                    <p className='text-red-600 italic'>
-                      {errors.firstName}
-                    </p>
-                  ):null
-                }
+                {errors.firstname && touched.firstname ? (
+                  <p className="text-red-600 italic">{errors.firstname}</p>
+                ) : null}
               </div>
 
               <div className="flex flex-col">
@@ -70,18 +71,15 @@ const Register = ({ handleCross, handleLogin }) => {
                   type="text"
                   className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                   placeholder="Last Name "
-                  name="lastName"
-                  value={values.lastName}
+                  name="lastname"
+                  id="lastname"
+                  value={values.lastname}
                   onChange={handleChange}
                   onBlur={handleBur}
                 />
-                   {
-                  errors.lastName && touched.lastName ?(
-                    <p className='text-red-600 italic'>
-                      {errors.lastName}
-                    </p>
-                  ):null
-                }
+                {errors.lastname && touched.lastname ? (
+                  <p className="text-red-600 italic">{errors.lastname}</p>
+                ) : null}
               </div>
               <div className="flex flex-col">
                 <label className="pt-2 font-bold">Email</label>
@@ -90,18 +88,14 @@ const Register = ({ handleCross, handleLogin }) => {
                   className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                   placeholder="Email "
                   name="email"
+                  id='email'
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBur}
-                  
                 />
-                   {
-                  errors.email && touched.email ?(
-                    <p className='text-red-600 italic'>
-                      {errors.email}
-                    </p>
-                  ):null
-                }
+                {errors.email && touched.email ? (
+                  <p className="text-red-600 italic">{errors.email}</p>
+                ) : null}
               </div>
 
               <div className="flex flex-col">
@@ -111,17 +105,14 @@ const Register = ({ handleCross, handleLogin }) => {
                   className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                   placeholder="Enter your name "
                   name="password"
+                  id="password"
                   value={values.password}
                   onChange={handleChange}
                   onBlur={handleBur}
                 />
-                   {
-                  errors.password && touched.password ?(
-                    <p className='text-red-600 italic'>
-                      {errors.password}
-                    </p>
-                  ):null
-                }
+                {errors.password && touched.password ? (
+                  <p className="text-red-600 italic">{errors.password}</p>
+                ) : null}
               </div>
               <Button
                 width={"w-2/3"}
