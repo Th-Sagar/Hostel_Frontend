@@ -1,5 +1,5 @@
 import React from 'react'
-import { FaSearchLocation } from 'react-icons/fa'
+import Search from './Search'
 
 const Banner = () => {
   return (
@@ -9,14 +9,7 @@ const Banner = () => {
         <h1 className="text-white text-xl font-bold ">
           Find Hostels all over Nepal
         </h1>
-        <div className=" bg-white rounded-3xl flex p-1 shadow ">
-          <input
-            className="pl-4 rounded-2xl outline-none"
-            type="text"
-            placeholder="Start your search.."
-          />
-          <FaSearchLocation className="search" />
-        </div>
+      <Search searchId={"banner"}/>
       </div>
       <div className=" md:w-1/2 flex pt-10  md:pt-16 md:left-16 relative justify-center items-center ">
         <img

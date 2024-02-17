@@ -19,7 +19,7 @@ const Home = () => {
         <section className="mt-20">
           <h1 className="text-xl font-bold">Recommended hostels</h1>
 
-          <div className="bg-gray-800 flex justify-between md:flex-row flex-col text-white rounded-2xl mt-20 lg:h-72 pt-20 md:pt-0 gap-20 md:gap-0 ">
+          <div className="bg-gray-800 flex justify-between md:flex-row flex-col text-white rounded-2xl mt-20 lg:h-[35rem] pt-20 md:pt-0 gap-20 md:gap-0 ">
             <div className="md:w-1/3 flex flex-col justify-center pl-16 break-words text-wrap">
               <h1 className="text-lg font-extrabold">Host your Hostel.</h1>
               <p className="pt-2 font-light ">
@@ -32,7 +32,7 @@ const Home = () => {
               />
             </div>
 
-            <div className="md:w-2/3 rounded-2xl">
+            <div className="md:w-2/3 rounded-2xl ">
               <img
                 src="/images/host-hostel.jpg"
                 className="rounded-2xl"

@@ -15,9 +15,9 @@ export const loginUser = createAsyncThunk(
       const result = await response.json();
       if (response.ok) {
         localStorage.setItem("token", result.token);
-        return result.token; 
+        return result.token;
       } else {
-        return rejectWithValue({ message: result.message }); 
+        return rejectWithValue({ message: result.message });
       }
     } catch (error) {
       return rejectWithValue({ message: error.message });
@@ -37,6 +37,23 @@ export const registerUser = createAsyncThunk(
         body: JSON.stringify(data),
       });
       const result = await response.json();
+      
+      return result;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
+export const searchHostel = createAsyncThunk(
+  "searchHostel",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/hostel/search?location=${data}`
+      );
+      const result = await response.json();
+      console.log("result", result);
       return result;
     } catch (error) {
       return rejectWithValue({ message: error.message });
@@ -45,9 +62,10 @@ export const registerUser = createAsyncThunk(
 );
 
 const initialState = {
-  token: localStorage.getItem("token") || null, 
+  token: localStorage.getItem("token") || null,
   loading: false,
   error: null,
+  searchItem: [],
 };
 
 const userDetailSlice = createSlice({
@@ -74,6 +92,17 @@ const userDetailSlice = createSlice({
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(searchHostel.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(searchHostel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchItem = action.payload;
+      })
+      .addCase(searchHostel.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });

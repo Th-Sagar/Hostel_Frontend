@@ -6,8 +6,8 @@ const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <>
-      <footer className="container mt-20">
-        <main className=" grid md:grid-cols-3 list-none bg-gray-300 rounded-2xl  items-center py-10 text-center ">
+      <footer className="mt-20">
+        <main className=" grid md:grid-cols-3 list-none bg-gray-300  items-center py-10 text-center ">
           <div className="pl-4 break-words md:w-64">
             <p className="text-sm">
               Your smart hostel booking site so you can find hostels faster
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
         </main>
 
-        <main className="bg-gray-600 flex flex-col justify-center items-center pt-5  rounded-t-lg">
+        <main className="bg-gray-600 flex flex-col justify-center items-center pt-5">
           <Link to="/">
             <img src="/images/hostel.png" width="30px " alt="" />
           </Link>

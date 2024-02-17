@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FaSearchLocation } from "react-icons/fa";
 import { IoMdPerson } from "react-icons/io";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
@@ -7,12 +6,14 @@ import Login from "./Login";
 import Register from "./Register";
 import { useSelector } from "react-redux";
 import RegisterHostel from "./RegisterHostel";
+import Search from "./Search";
 
 const Navbar = () => {
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [detailHostel, setDetailHostel] = useState(false);
+  const [scroll, setScroll] = useState(0);
 
   const { token,loading } = useSelector((state) => state.userDetail);
  
@@ -44,32 +45,25 @@ const Navbar = () => {
     
   
   }
-  if(loading){
-    return <h1>Loading...</h1>
-  }
+  // if(loading){
+  //   return <h1>Loading...</h1>
+  // }
 
   const setToken = !!token;
 
-  console.log(setToken);
+
 
   return (
     <>
-      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
-        <main className="flex justify-between">
+      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  "  >
+        <main className="flex justify-between" >
           <div className="p-2">
             <NavLink className="pointer" to="/">
               <img src="/images/hostel.png" alt="Hostel " width="20px " />
             </NavLink>
           </div>
 
-          <div className="border rounded-3xl flex p-1 shadowin ">
-            <input
-              className="pl-4 outline-none"
-              type="text"
-              placeholder="Start your search.."
-            />
-            <FaSearchLocation className="search" />
-          </div>
+        <Search searchId={"navbar"}/>
 
           <div className="md:flex gap-3 hidden">
             <ul className="lg:flex gap-4 hidden text-center p-2 justify-center items-center">
