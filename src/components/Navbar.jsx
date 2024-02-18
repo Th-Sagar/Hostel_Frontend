@@ -13,10 +13,8 @@ const Navbar = () => {
   const [register, setRegister] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [detailHostel, setDetailHostel] = useState(false);
-  const [scroll, setScroll] = useState(0);
 
-  const { token,loading } = useSelector((state) => state.userDetail);
- 
+  const { token } = useSelector((state) => state.userDetail);
 
   const handleLogin = () => {
     setLogin(!login);
@@ -39,31 +37,25 @@ const Navbar = () => {
     setDetailHostel(!detailHostel);
   };
 
-  const handleLogout=()=>{
+  const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
-    
-  
-  }
-  // if(loading){
-  //   return <h1>Loading...</h1>
-  // }
+  };
+ 
 
   const setToken = !!token;
 
-
-
   return (
     <>
-      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  "  >
-        <main className="flex justify-between" >
+      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
+        <main className="flex justify-between">
           <div className="p-2">
             <NavLink className="pointer" to="/">
               <img src="/images/hostel.png" alt="Hostel " width="20px " />
             </NavLink>
           </div>
 
-        <Search searchId={"navbar"}/>
+          <Search searchId={"navbar"} />
 
           <div className="md:flex gap-3 hidden">
             <ul className="lg:flex gap-4 hidden text-center p-2 justify-center items-center">
@@ -78,6 +70,12 @@ const Navbar = () => {
                 {" "}
                 <NavLink to="/contact">Contact</NavLink>
               </li>
+              {setToken && (
+                <li className="pointer font">
+                  {" "}
+                  <NavLink to="/hostel/show">Hostel</NavLink>
+                </li>
+              )}
             </ul>
             <ul className="flex gap-2">
               {setToken ? (
@@ -107,19 +105,25 @@ const Navbar = () => {
                   <div
                     className={`fixed inset-0 top-24  left-[90%] lg:left-[92.27%] 
                     xl:left-[93.4%] text-center 2xl:left-[88.3%] w-32 lg:w-32 2xl:w-36 ${
-                      setToken ? "h-1/6" : "h-1/5"
+                      setToken ? "h-1/5" : "h-1/5"
                     } md:left-[87%] bg-white border rounded-xl shadow-lg`}
                   >
                     <ul className="my-2">
                       {setToken ? (
                         <>
-                        <li className="dropdown p-3" onClick={handleLogout}>Logout</li>
-                        <br />
+                          <li className="dropdown p-3" onClick={handleLogout}>
+                            Logout
+                          </li>
+                          <li className="dropdown p-3 ">
+                            {" "}
+                            <NavLink to="/hostel/show">Hostel</NavLink>
+                          </li>
 
-                        <li className="dropdown p-3" onClick={handleHostel}>
-                          Host your hostel
-                        </li>
-                        
+                          <br className="hidden lg:inline-block" />
+
+                          <li className="dropdown p-3" onClick={handleHostel}>
+                            Host your hostel
+                          </li>
                         </>
                       ) : (
                         <>
@@ -136,7 +140,6 @@ const Navbar = () => {
                           </li>
                         </>
                       )}
-                     
 
                       <li className="dropdown p-3">Help</li>
                     </ul>

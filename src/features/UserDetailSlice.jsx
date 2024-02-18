@@ -37,6 +37,21 @@ export const registerUser = createAsyncThunk(
         body: JSON.stringify(data),
       });
       const result = await response.json();
+
+      return result;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
+
+export const searchHostel = createAsyncThunk(
+  "searchHostel",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/hostel/show");
+      const result = await response.json();
       
       return result;
     } catch (error) {
@@ -45,15 +60,14 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-export const searchHostel = createAsyncThunk(
-  "searchHostel",
+
+export const searchHostelOne = createAsyncThunk(
+  "searchHostelOne",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/hostel/search?location=${data}`
-      );
+      const response = await fetch(`http://localhost:5000/api/hostel/search?location=${data}`);
       const result = await response.json();
-      console.log("result", result);
+     
       return result;
     } catch (error) {
       return rejectWithValue({ message: error.message });
@@ -103,6 +117,17 @@ const userDetailSlice = createSlice({
         state.searchItem = action.payload;
       })
       .addCase(searchHostel.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(searchHostelOne.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(searchHostelOne.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchItem = action.payload;
+      })
+      .addCase(searchHostelOne.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });
