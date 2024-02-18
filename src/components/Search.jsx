@@ -21,7 +21,7 @@ const Search = ({ searchId }) => {
   return (
     <div className="border bg-white rounded-3xl flex p-1 shadowin ">
       <input
-        className="pl-4 rounded-2xl outline-none"
+        className="pl-4 capitalize rounded-2xl outline-none"
         type="text"
         placeholder="Start your search.."
         name="search"

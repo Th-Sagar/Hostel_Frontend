@@ -33,5 +33,10 @@
 .dropdown{
   @apply hover:bg-gray-300 transition-all ease-in duration-300 ;
 }
+.hostelLabel{
+  @apply p-2 font-semibold text-lg md:text-2xl;
+}
 
-
+.hostelInput{
+  @apply capitalize outline-none py-2 px-3 shadow-inner rounded-md w-52;
+}

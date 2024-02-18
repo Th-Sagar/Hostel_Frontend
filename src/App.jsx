@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import About from "./pages/About";
 import Error from "./components/Error";
 import SearchData from "./pages/SearchData";
+import RegisterHostel from "./pages/RegisterHostel";
 const App = () => {
   return (
     <>
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/hostel/:search" element={<SearchData/>} />
+          <Route path="/hostel/register" element={<RegisterHostel/>} />
           <Route path="*" element={<Error/>} />
         </Routes>
         <Footer />

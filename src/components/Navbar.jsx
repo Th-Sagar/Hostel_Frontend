@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
 import { useSelector } from "react-redux";
-import RegisterHostel from "./RegisterHostel";
 import Search from "./Search";
 
 const Navbar = () => {
@@ -14,7 +13,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [detailHostel, setDetailHostel] = useState(false);
 
-  const { token } = useSelector((state) => state.userDetail);
+  const { token,contentpush } = useSelector((state) => state.userDetail);
 
   const handleLogin = () => {
     setLogin(!login);
@@ -41,10 +40,9 @@ const Navbar = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
- 
 
   const setToken = !!token;
-
+  
   return (
     <>
       <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
@@ -70,20 +68,13 @@ const Navbar = () => {
                 {" "}
                 <NavLink to="/contact">Contact</NavLink>
               </li>
-              {setToken && (
-                <li className="pointer font">
-                  {" "}
-                  <NavLink to="/hostel/show">Hostel</NavLink>
-                </li>
-              )}
+              {setToken && <li className="pointer font">
+              <NavLink to="/hostel/show">Hostel</NavLink> </li>}
             </ul>
             <ul className="flex gap-2">
               {setToken ? (
-                <li
-                  className="font-semibold border p-2 rounded-xl shadowin pointer"
-                  onClick={handleHostel}
-                >
-                  Host your hostel
+                <li className="font-semibold border p-2 rounded-xl shadowin pointer">
+                  <NavLink to="/hostel/register"> Host your hostel</NavLink>
                 </li>
               ) : (
                 <li
@@ -121,8 +112,11 @@ const Navbar = () => {
 
                           <br className="hidden lg:inline-block" />
 
-                          <li className="dropdown p-3" onClick={handleHostel}>
-                            Host your hostel
+                          <li className="dropdown p-3">
+                            <NavLink to="/hostel/register">
+                              {" "}
+                              Host your hostel
+                            </NavLink>
                           </li>
                         </>
                       ) : (
@@ -156,8 +150,6 @@ const Navbar = () => {
       {register && !setToken && (
         <Register handleCross={handleCross} handleLogin={handleLogin} />
       )}
-
-      {detailHostel && <RegisterHostel handleHostel={handleHostel} />}
     </>
   );
 };

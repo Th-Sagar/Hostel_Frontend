@@ -75,11 +75,32 @@ export const searchHostelOne = createAsyncThunk(
   }
 );
 
+export const hostelRegister = createAsyncThunk(
+  "hostelRegister",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/hostel/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const result = await response.json();
+      console.log("post",result)
+      return response.ok;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
 const initialState = {
   token: localStorage.getItem("token") || null,
   loading: false,
   error: null,
   searchItem: [],
+  contentpush: false,
 };
 
 const userDetailSlice = createSlice({
@@ -128,6 +149,17 @@ const userDetailSlice = createSlice({
         state.searchItem = action.payload;
       })
       .addCase(searchHostelOne.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(hostelRegister.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(hostelRegister.fulfilled, (state, action) => {
+        state.loading = false;
+        state.contentpush = action.payload;
+      })
+      .addCase(hostelRegister.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });
