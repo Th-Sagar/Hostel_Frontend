@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { searchHostel, searchHostelOne } from "../features/UserDetailSlice";
+import { hostelDetail, searchHostel, searchHostelOne } from "../features/UserDetailSlice";
 import {
   Card,
   CardHeader,
@@ -39,7 +39,7 @@ const SearchData = () => {
   }, [search]);
 
   if (!searchItem) {
-    return <div>No hostel data available</div>;
+    return <div className="container text-2xl font-bold text-center capitalize">No hostel data available</div>;
   }
 
   if (!searchItem.hostel) {
@@ -51,7 +51,7 @@ const SearchData = () => {
   }
 
   const handleClick=(value)=>{
-    console.log("click",value)
+    navigate(`/hostel/show/${value}`)
   }
   return (
     <>
