@@ -24,7 +24,7 @@ export const hostelSchema = Yup.object({
   hostelRating: Yup.string()
     .min(0, "Hostel Rating must be at least 3 characters")
     .required("Hostel Rating is required")
-    .max(1, "Hostel Rating must be at most 15 characters"),
+    .max(3, "Hostel Rating must be at most 15 characters"),
   hostelContact: Yup.string()
     .min(10, "Hostel Contact must be at least 3 characters")
     .required("Hostel Contact is required")

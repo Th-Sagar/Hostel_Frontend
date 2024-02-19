@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { hostelDetail, searchHostel, searchHostelOne } from "../features/UserDetailSlice";
+import {
+  hostelDetail,
+  searchHostel,
+  searchHostelOne,
+} from "../features/UserDetailSlice";
 import {
   Card,
   CardHeader,
@@ -23,13 +27,12 @@ const SearchData = () => {
   const dispatch = useDispatch();
   const setToken = !!token;
 
- useEffect(() => {
-  if (!setToken) {
-    navigate("/");
-  }
+  useEffect(() => {
+    if (!setToken) {
+      navigate("/");
+    }
+  }, [setToken, navigate]);
 
- }, [setToken, navigate])
- 
   useEffect(() => {
     if (search === "show") {
       dispatch(searchHostel());
@@ -39,7 +42,11 @@ const SearchData = () => {
   }, [search]);
 
   if (!searchItem) {
-    return <div className="container text-2xl font-bold text-center capitalize">No hostel data available</div>;
+    return (
+      <div className="container text-2xl font-bold text-center capitalize">
+        No hostel data available
+      </div>
+    );
   }
 
   if (!searchItem.hostel) {
@@ -50,18 +57,36 @@ const SearchData = () => {
     );
   }
 
-  const handleClick=(value)=>{
-    navigate(`/hostel/show/${value}`)
-  }
+  const handleClick = (value) => {
+    navigate(`/hostel/show/${value}`);
+  };
   return (
     <>
-      <main className="container">
-        <div className="flex  gap-6 flex-wrap justify-center ">
+      <main className="container mt-10">
+       <div>
+        {
+          search==="show"?
+          <h1 className="text-2xl font-bold text-center capitalize">
+            All Hostels
+          </h1>:
+          <h1 className="text-2xl font-bold text-center capitalize">
+            Search Result {search}
+          </h1>
+        }
+       </div>
+
+        <div className="flex  gap-6 flex-wrap justify-center mt-10 ">
           {searchItem.hostel.map((hostel, index) => {
             return (
-              <Card maxW="sm" key={index} onClick={()=>{
-                handleClick(hostel._id) 
-              }} className="hover:scale-110 transition-all ease-in-out duration-500">
+              <Card
+                maxW="sm"
+              
+                key={index}
+                onClick={() => {
+                  handleClick(hostel._id);
+                }}
+                className="hover:scale-110 transition-all ease-in-out duration-500 mt-10"
+              >
                 <CardBody>
                   <Image
                     src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
