@@ -54,7 +54,7 @@ const HostelDetail = () => {
                 <Text className="italic flex ">
                   <Star value={hostelInfo.hostelRating} />
                 </Text>
-                <Text className="italic">Rs.{hostelInfo.hostelPrice}</Text>
+                <Text className="italic">{hostelInfo.hostelContact}</Text>
               </div>
             </CardBody>
             <Divider />

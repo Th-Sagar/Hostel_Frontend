@@ -13,7 +13,7 @@ const Search = ({ searchId }) => {
   const handleSearchButton = (e) => {
     e.preventDefault();
     if (search) {
-      navigate(`/hostel/${search}`);
+      navigate(`/hostel/search?q=${search}`);
       setSearch("");
     }
   };

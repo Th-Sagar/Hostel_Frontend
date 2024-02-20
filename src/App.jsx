@@ -9,6 +9,7 @@ import Error from "./components/Error";
 import SearchData from "./pages/SearchData";
 import RegisterHostel from "./pages/RegisterHostel";
 import HostelDetail from "./pages/HostelDetail";
+import Book from "./pages/Book";
 const App = () => {
   return (
     <>
@@ -19,15 +20,16 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/hostel/:search" element={<SearchData />} />
+          <Route path="/hostel/search" element={<SearchData />} />
           <Route path="/hostel/register" element={<RegisterHostel />} />
           <Route path="/hostel/show/:id" element={<HostelDetail />} />
+          <Route path="/hostel/book/:id" element={<Book/>}/>
           <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
       </Router>
     </>
   );
-};
+};7
 
 export default App;

@@ -3,7 +3,7 @@ import Search from "./Search";
 
 const Banner = () => {
   return (
-    <section className="relative bg-[url('public/images/herobg.jpg')] rounded-xl bg-no-repeat bg-cover ">
+    <section className="relative bg-[url('/images/herobg.jpg')] rounded-xl bg-no-repeat bg-cover ">
       <section className="flex justify-between md:flex-row flex-col">
         <div className="flex flex-col justify-center gap-6 items-center md:w-1/2 pl-10 pt-24 ">
           <h1 className="text-white text-xl font-bold ">

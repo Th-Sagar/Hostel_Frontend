@@ -70,7 +70,7 @@ const Navbar = () => {
               </li>
               {setToken && (
                 <li className="pointer font">
-                  <NavLink to="/hostel/show">Hostel</NavLink>{" "}
+                  <NavLink to="/hostel/search?q=all">Hostel</NavLink>{" "}
                 </li>
               )}
             </ul>
@@ -110,7 +110,7 @@ const Navbar = () => {
                           </li>
                           <li className="dropdown p-3 ">
                             {" "}
-                            <NavLink to="/hostel/show">Hostel</NavLink>
+                            <NavLink to="/hostel/search?q=all">Hostel</NavLink>
                           </li>
 
                           <br className="hidden lg:inline-block" />

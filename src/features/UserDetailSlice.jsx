@@ -57,6 +57,21 @@ export const searchHostel = createAsyncThunk(
   }
 );
 
+export const recommendedHostel = createAsyncThunk(
+  "recommendedHostel",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/hostel/show?skip=0&limit=6"
+      );
+      const result = await response.json();
+      return result.hostel;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
+
 export const searchHostelOne = createAsyncThunk(
   "searchHostelOne",
   async (data, { rejectWithValue }) => {
@@ -104,7 +119,6 @@ export const hostelDetail = createAsyncThunk(
         `http://localhost:5000/api/hostel/show/${data}`
       );
       const result = await response.json();
-      console.log(result.message.hostelName);
       return result.message;
     } catch (error) {
       return rejectWithValue({ message: error.message });
@@ -189,6 +203,17 @@ const userDetailSlice = createSlice({
         state.hostelInfo = action.payload;
       })
       .addCase(hostelDetail.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(recommendedHostel.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(recommendedHostel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.searchItem = action.payload;
+      })
+      .addCase(recommendedHostel.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });

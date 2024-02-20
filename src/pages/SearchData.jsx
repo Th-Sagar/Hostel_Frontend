@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import {
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import {
   hostelDetail,
   searchHostel,
@@ -8,7 +11,6 @@ import {
 } from "../features/UserDetailSlice";
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Image,
@@ -22,24 +24,27 @@ import {
 
 const SearchData = () => {
   const { searchItem, token } = useSelector((state) => state.userDetail);
-  const { search } = useParams();
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const query = searchParams.get("q");
+  const searchQuery = query.charAt(0).toUpperCase() + query.slice(1)
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const setToken = !!token;
-
   useEffect(() => {
-    if (!setToken) {
+    if (!token) {
       navigate("/");
     }
-  }, [setToken, navigate]);
+  }, [token, navigate]);
 
-  useEffect(() => {
-    if (search === "show") {
+  useEffect(() => { 
+    if (query === "all") {
       dispatch(searchHostel());
     } else {
-      dispatch(searchHostelOne(search));
+      dispatch(searchHostelOne(searchQuery))
     }
-  }, [search]);
+
+
+  }, [query]);
 
   if (!searchItem) {
     return (
@@ -57,20 +62,24 @@ const SearchData = () => {
     );
   }
 
-  const handleClick = (value) => {
+  const handleDetail = (value) => {
     navigate(`/hostel/show/${value}`);
+  };
+
+  const handleRegister = (value) => {
+    navigate(`/hostel/book/${value}`);
   };
   return (
     <>
       <main className="container mt-10">
         <div>
-          {search === "show" ? (
+          {query === "all" ? (
             <h1 className="text-2xl font-bold text-center capitalize">
               All Hostels
             </h1>
           ) : (
             <h1 className="text-2xl font-bold text-center capitalize">
-              Search Result {search}
+              Search Result {query}
             </h1>
           )}
         </div>
@@ -81,15 +90,13 @@ const SearchData = () => {
               <Card
                 maxW="sm"
                 key={index}
-               
-                className="hover:scale-110 transition-all ease-in-out duration-500 my-10"
+                className="my-10"
               >
                 <CardBody>
                   <Image
                     src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                     alt="Green double couch with wooden legs"
                     borderRadius="lg"
-                   
                   />
                   <Stack mt="6" spacing="3">
                     <Heading size="md" className="capitalize">
@@ -112,12 +119,22 @@ const SearchData = () => {
                 <Divider />
                 <CardFooter>
                   <ButtonGroup spacing="2">
-                    <Button variant="solid" colorScheme="blue">
+                    <Button
+                      variant="solid"
+                      colorScheme="blue"
+                      onClick={() => {
+                        handleRegister(hostel._id);
+                      }}
+                    >
                       Book Now
                     </Button>
-                    <Button variant="ghost" colorScheme="blue"  onClick={() => {
-                      handleClick(hostel._id);
-                    }}>
+                    <Button
+                      variant="ghost"
+                      colorScheme="blue"
+                      onClick={() => {
+                        handleDetail(hostel._id);
+                      }}
+                    >
                       View Details
                     </Button>
                   </ButtonGroup>

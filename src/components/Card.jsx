@@ -1,48 +1,51 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Card = () => {
   const imagesDetails = [
     {
       img: "/places/anamnagar.jpg",
       title: "Anamnagar",
-      link: "/places/anamnagar",
+      link: "/hostel/search?q=anamnagar",
     },
     {
       img: "/places/baneshwor.jpg",
       title: "Baneshwor",
-      link: "/places/baneshwor",
+      link: "/hostel/search?q=baneshwor",
     },
     {
       img: "/places/bhaktapur.jpg",
       title: "Bhaktapur",
-      link: "/places/bhaktapur",
+      link: "/hostel/search?q=bhaktapur",
     },
     {
       img: "/places/kritipur.jpg",
       title: "Kritipur",
-      link: "/places/kritipur",
+      link: "/hostel/search?q=kritipur",
     },
     {
       img: "/places/maitidevi.jpg",
       title: "Maitidevi",
-      link: "/places/maitidevi",
+      link: "/hostel/search?q=maitidevi",
     },
     {
       img: "/places/patan.jpg",
       title: "Patan",
-      link: "/places/patan",
+      link: "/hostel/search?q=patan",
     },
     {
       img: "/places/putalisadak.jpg",
       title: "Putalisadak",
-      link: "/places/putalisadak",
+      link: "/hostel/search?q=putalisadak",
     },
     {
       img: "/places/sankhamul.jpg",
       title: "Sankhamul",
-      link: "/places/sankhamul",
+      link: "/hostel/search?q=sankhamul",
     },
   ];
+
+  const navigate = useNavigate();
   return (
     <main className="grid md:grid-cols-4 grid-cols-2 pointer  ">
       {imagesDetails.map((curElem, index) => {
@@ -54,7 +57,14 @@ const Card = () => {
               alt={curElem.title}
             />
 
-            <h5 className="text-lg font-semibold">{curElem.title}</h5>
+            <h5
+              className="text-lg font-semibold"
+              onClick={() => {
+                navigate(`${curElem.link}`);
+              }}
+            >
+              {curElem.title}
+            </h5>
           </div>
         );
       })}

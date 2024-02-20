@@ -3,6 +3,7 @@ import { FaSearchLocation } from "react-icons/fa";
 import Card from "../components/Card";
 import Banner from "../components/Banner";
 import Button from "../components/Button";
+import RecommendedHostel from "../components/RecommendedHostel";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
 
         <section className="mt-20">
           <h1 className="text-xl font-bold">Recommended hostels</h1>
+          <RecommendedHostel/>
 
           <div className="bg-gray-800 flex justify-between md:flex-row flex-col text-white rounded-2xl mt-20 lg:h-[35rem] pt-20 md:pt-0 gap-20 md:gap-0 ">
             <div className="md:w-1/3 flex flex-col justify-center pl-16 break-words text-wrap">
