@@ -20,5 +20,6 @@ module.exports = {
     "no-unused-vars":'off',
     "react/prop-types": "off",
     "no-extra-boolean-cast": "off",
+    "react-hooks/exhaustive-deps":"off",
   },
 }

@@ -63,41 +63,39 @@ const SearchData = () => {
   return (
     <>
       <main className="container mt-10">
-       <div>
-        {
-          search==="show"?
-          <h1 className="text-2xl font-bold text-center capitalize">
-            All Hostels
-          </h1>:
-          <h1 className="text-2xl font-bold text-center capitalize">
-            Search Result {search}
-          </h1>
-        }
-       </div>
+        <div>
+          {search === "show" ? (
+            <h1 className="text-2xl font-bold text-center capitalize">
+              All Hostels
+            </h1>
+          ) : (
+            <h1 className="text-2xl font-bold text-center capitalize">
+              Search Result {search}
+            </h1>
+          )}
+        </div>
 
         <div className="flex  gap-6 flex-wrap justify-center mt-10 ">
           {searchItem.hostel.map((hostel, index) => {
             return (
               <Card
                 maxW="sm"
-              
                 key={index}
-                onClick={() => {
-                  handleClick(hostel._id);
-                }}
-                className="hover:scale-110 transition-all ease-in-out duration-500 mt-10"
+               
+                className="hover:scale-110 transition-all ease-in-out duration-500 my-10"
               >
                 <CardBody>
                   <Image
                     src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
                     alt="Green double couch with wooden legs"
                     borderRadius="lg"
+                   
                   />
                   <Stack mt="6" spacing="3">
                     <Heading size="md" className="capitalize">
                       {hostel.hostelName}
                     </Heading>
-                    <Text className="capitalize text-lg font-light">
+                    <Text className="capitalize text-lg ">
                       {hostel.hostelDescription}
                     </Text>
                     <div className="flex gap-16">
@@ -117,8 +115,10 @@ const SearchData = () => {
                     <Button variant="solid" colorScheme="blue">
                       Book Now
                     </Button>
-                    <Button variant="ghost" colorScheme="blue">
-                      Contact Now
+                    <Button variant="ghost" colorScheme="blue"  onClick={() => {
+                      handleClick(hostel._id);
+                    }}>
+                      View Details
                     </Button>
                   </ButtonGroup>
                 </CardFooter>

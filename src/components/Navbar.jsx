@@ -13,7 +13,7 @@ const Navbar = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [detailHostel, setDetailHostel] = useState(false);
 
-  const { token,contentpush } = useSelector((state) => state.userDetail);
+  const { token, contentpush } = useSelector((state) => state.userDetail);
 
   const handleLogin = () => {
     setLogin(!login);
@@ -42,10 +42,10 @@ const Navbar = () => {
   };
 
   const setToken = !!token;
-  
+
   return (
     <>
-      <section className="container  py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
+      <section className="px-[5%] overflow-hidden py-4 sticky top-0  bg-white z-10 border rounded-lg  ">
         <main className="flex justify-between">
           <div className="p-2">
             <NavLink className="pointer" to="/">
@@ -68,8 +68,11 @@ const Navbar = () => {
                 {" "}
                 <NavLink to="/contact">Contact</NavLink>
               </li>
-              {setToken && <li className="pointer font">
-              <NavLink to="/hostel/show">Hostel</NavLink> </li>}
+              {setToken && (
+                <li className="pointer font">
+                  <NavLink to="/hostel/show">Hostel</NavLink>{" "}
+                </li>
+              )}
             </ul>
             <ul className="flex gap-2">
               {setToken ? (

@@ -21,8 +21,6 @@ const HostelDetail = () => {
   const dispatch = useDispatch();
   const { hostelInfo } = useSelector((state) => state.userDetail);
 
- 
-
   useEffect(() => {
     dispatch(hostelDetail(id));
   }, []);
@@ -45,14 +43,16 @@ const HostelDetail = () => {
           <Stack>
             <CardBody>
               <Heading className="capitalize">{hostelInfo.hostelName}</Heading>
-              <Text py="2 " className="flex flex-wrap break-words">{hostelInfo.hostelDescription}</Text>
+              <Text py="2 " className="flex flex-wrap break-words">
+                {hostelInfo.hostelDescription}
+              </Text>
               <div className="flex flex-wrap justify-between">
                 <Text className="italic">{hostelInfo.hostelLocation}</Text>
                 <Text className="italic">Rs.{hostelInfo.hostelPrice}</Text>
               </div>
               <div className="flex flex-wrap justify-between">
                 <Text className="italic flex ">
-                  <Star value={hostelInfo.hostelRating}/>
+                  <Star value={hostelInfo.hostelRating} />
                 </Text>
                 <Text className="italic">Rs.{hostelInfo.hostelPrice}</Text>
               </div>

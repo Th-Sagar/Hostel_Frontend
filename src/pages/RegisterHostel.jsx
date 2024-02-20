@@ -16,36 +16,40 @@ const RegisterHostel = () => {
       navigate("/");
     }
   }, []);
-  const { values, errors, handleBur, handleChange, handleSubmit, touched,resetForm } =
-    useFormik({
-      initialValues: {
-        hostelName: "",
-        hostelLocation: "",
-        hostelPrice: "",
-        hostelDescription: "",
-        hostelImage: "",
-        hostelRating: "",
-        hostelContact: "",
-      },
-      validationSchema: hostelSchema,
-      onSubmit: (values) => {
-        dispatch(hostelRegister(values));
+  const {
+    values,
+    errors,
+    handleBur,
+    handleChange,
+    handleSubmit,
+    touched,
+    resetForm,
+  } = useFormik({
+    initialValues: {
+      hostelName: "",
+      hostelLocation: "",
+      hostelPrice: "",
+      hostelDescription: "",
+      hostelImage: "",
+      hostelRating: "",
+      hostelContact: "",
+    },
+    validationSchema: hostelSchema,
+    onSubmit: (values) => {
+      dispatch(hostelRegister(values));
 
-        console.log(values);
-      },
-    });
+      console.log(values);
+    },
+  });
   if (values.hostelRating > 5) {
     values.hostelRating = 5;
   }
 
   useEffect(() => {
-    if(contentpush){
-       resetForm();
-  
+    if (contentpush) {
+      resetForm();
     }
-   
-  }, [contentpush])
-  
+  }, [contentpush]);
 
   return (
     <>

@@ -27,7 +27,8 @@ const Home = () => {
                 students.
               </p>
               <Button
-                width={"w-1/2"} title={"Learn More"}
+                width={"w-1/2"}
+                title={"Learn More"}
                 bg={" bg-white text-black   hover:bg-black hover:text-white"}
               />
             </div>

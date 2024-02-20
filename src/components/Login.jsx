@@ -23,7 +23,6 @@ const Login = ({ handleCross, handleRegister }) => {
       },
     });
   const { token } = useSelector((state) => state.userDetail);
- 
 
   return (
     <section className="fixed inset-0 z-50 flex items-center justify-center bg-gray-600 bg-opacity-30  ">

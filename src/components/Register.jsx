@@ -20,7 +20,6 @@ const Register = ({ handleCross, handleLogin }) => {
       initialValues,
       validationSchema: signUpSchema,
       onSubmit: (values, action) => {
-        
         dispatch(registerUser(values));
         action.resetForm();
       },
@@ -55,7 +54,7 @@ const Register = ({ handleCross, handleLogin }) => {
                   className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                   placeholder="First Name "
                   name="firstname"
-                  id='firstname'
+                  id="firstname"
                   value={values.firstname}
                   onChange={handleChange}
                   onBlur={handleBur}
@@ -88,7 +87,7 @@ const Register = ({ handleCross, handleLogin }) => {
                   className="py-2 outline-none border-b-2 focus:border-b-2 focus:border-blue-500 transition-all ease-in duration-300"
                   placeholder="Email "
                   name="email"
-                  id='email'
+                  id="email"
                   value={values.email}
                   onChange={handleChange}
                   onBlur={handleBur}

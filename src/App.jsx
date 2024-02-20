@@ -19,10 +19,10 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/hostel/:search" element={<SearchData/>} />
-          <Route path="/hostel/register" element={<RegisterHostel/>} />
-          <Route path="/hostel/show/:id" element={<HostelDetail/>}/>
-          <Route path="*" element={<Error/>} />
+          <Route path="/hostel/:search" element={<SearchData />} />
+          <Route path="/hostel/register" element={<RegisterHostel />} />
+          <Route path="/hostel/show/:id" element={<HostelDetail />} />
+          <Route path="*" element={<Error />} />
         </Routes>
         <Footer />
       </Router>
