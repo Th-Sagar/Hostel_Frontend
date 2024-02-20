@@ -16,6 +16,25 @@ import {
 } from "@chakra-ui/react";
 
 const RecommendedHostel = () => {
+  const { searchItem, loading } = useSelector((state) => state.userDetail);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(recommendedHostel());
+  }, []);
+
+  const handleDetail = (value) => {
+    navigate(`/hostel/show/${value}`);
+  };
+
+  const handleRegister = (value) => {
+    navigate(`/hostel/book/${value}`);
+  };
+
+  if (loading) {
+    return <h1>Loading...</h1>;
+  }
  
   return (
     <>
