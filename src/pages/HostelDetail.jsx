@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { hostelDetail } from "../features/UserDetailSlice";
 import { CiStar } from "react-icons/ci";
 import {
@@ -12,18 +12,21 @@ import {
   Heading,
   Image,
   Stack,
-  StackItem,
   Text,
 } from "@chakra-ui/react";
 import { Star } from "../components/Star";
 const HostelDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { hostelInfo } = useSelector((state) => state.userDetail);
 
   useEffect(() => {
     dispatch(hostelDetail(id));
   }, []);
+  const handleRegister = (value) => {
+    navigate(`/hostel/book/${value}`);
+  };
 
   return (
     <main className="container  md:w-max ">
@@ -59,7 +62,13 @@ const HostelDetail = () => {
             </CardBody>
             <Divider />
             <CardFooter>
-              <Button variant="solid" colorScheme="blue">
+              <Button
+                variant="solid"
+                colorScheme="blue"
+                onClick={() => {
+                  handleRegister(hostelInfo._id);
+                }}
+              >
                 Book Now
               </Button>
             </CardFooter>

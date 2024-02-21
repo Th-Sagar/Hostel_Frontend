@@ -23,6 +23,8 @@ export const loginUser = createAsyncThunk(
   }
 );
 
+
+
 export const registerUser = createAsyncThunk(
   "registerUser",
   async (data, { rejectWithValue }) => {
@@ -126,6 +128,26 @@ export const hostelDetail = createAsyncThunk(
   }
 );
 
+
+export const bookingHostel = createAsyncThunk(
+  "bookingHostel",
+  async(data,{rejectWithValue})=>{
+    try {
+      const response = await fetch("http://localhost:5000/api/hostel/book",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify(data)
+      })
+      return response.ok;
+      } catch (error) {
+      return rejectWithValue({message:error.message});
+      
+    }
+  }
+)
+
 const initialState = {
   token: localStorage.getItem("token") || null,
   loading: false,
@@ -133,6 +155,7 @@ const initialState = {
   searchItem: [],
   contentpush: false,
   hostelInfo: [],
+  response : false,
 };
 
 const userDetailSlice = createSlice({
@@ -214,6 +237,17 @@ const userDetailSlice = createSlice({
         state.searchItem = action.payload;
       })
       .addCase(recommendedHostel.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(bookingHostel.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(bookingHostel.fulfilled, (state, action) => {
+        state.loading = false;
+        state.response = action.payload;
+      })
+      .addCase(bookingHostel.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });

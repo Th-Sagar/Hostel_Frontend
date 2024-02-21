@@ -19,7 +19,6 @@ const RegisterHostel = () => {
   const {
     values,
     errors,
-    handleBur,
     handleChange,
     handleSubmit,
     touched,
@@ -39,18 +38,12 @@ const RegisterHostel = () => {
       dispatch(hostelRegister(values));
 
       console.log(values);
+      resetForm();
     },
   });
   if (values.hostelRating > 5) {
     values.hostelRating = 5;
   }
-
-  useEffect(() => {
-    if (contentpush) {
-      resetForm();
-    }
-  }, [contentpush]);
-
   return (
     <>
       <main className="container text-center md:w-max">
