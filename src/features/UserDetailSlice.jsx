@@ -1,9 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+const url = import.meta.env.VITE_URL;
 export const loginUser = createAsyncThunk(
   "loginUser",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      const response = await fetch(`${url}api/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -27,7 +28,7 @@ export const registerUser = createAsyncThunk(
   "registerUser",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch(`${url}api/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +48,7 @@ export const searchHostel = createAsyncThunk(
   "searchHostel",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/hostel/show");
+      const response = await fetch(`${url}api/hostel/show`);
       const result = await response.json();
 
       return result;
@@ -62,7 +63,7 @@ export const recommendedHostel = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/hostel/show?skip=0&limit=6"
+        `${url}api/hostel/show?skip=0&limit=6`
       );
       const result = await response.json();
       return result.hostel;
@@ -77,7 +78,7 @@ export const searchHostelOne = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/hostel/search?location=${data}`
+        `${url}api/hostel/search?location=${data}`
       );
       const result = await response.json();
 
@@ -93,7 +94,7 @@ export const hostelRegister = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/hostel/register",
+        `${url}api/hostel/register`,
         {
           method: "POST",
           headers: {
@@ -116,7 +117,7 @@ export const hostelDetail = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/hostel/show/${data}`
+        `${url}api/hostel/show/${data}`
       );
       const result = await response.json();
       return result.message;
@@ -130,7 +131,7 @@ export const bookingHostel = createAsyncThunk(
   "bookingHostel",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/hostel/book", {
+      const response = await fetch(`${url}api/hostel/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -148,7 +149,7 @@ export const tokenData = createAsyncThunk(
   "tokenData",
   async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/auth/usertoken", {
+      const response = await fetch(`${url}/api/auth/usertoken`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${data}`,
