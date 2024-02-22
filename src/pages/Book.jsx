@@ -4,34 +4,41 @@ import { useFormik } from "formik";
 import { bookSchema } from "../Schemas/bookSchemas";
 import { useDispatch, useSelector } from "react-redux";
 import { bookingHostel } from "../features/UserDetailSlice";
+import { jwtDecode } from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Book = () => {
-  const { response } = useSelector((state) => state.userDetail);
+  const { response, userItem } = useSelector((state) => state.userDetail);
 
   const dispatch = useDispatch();
-  
-  const { errors, values, handleChange, handleSubmit, touched ,resetForm} = useFormik({
-    initialValues: {
-      userName: "",
-      userContact: "",
-      hostelName: "",
-      hostelContact: "",
-      hostelLocation: "",
-    },
-    validationSchema: bookSchema,
-    onSubmit: (values) => {
-      dispatch(bookingHostel(values));
-      resetForm();
-    },
-  });
+  const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
-  console.log(token);
-  
-  
 
- 
- 
+  const decode = jwtDecode(token);
+
+  const { errors, values, handleChange, handleSubmit, touched, resetForm } =
+    useFormik({
+      initialValues: {
+        userName: decode.firstname,
+        userContact: "",
+        hostelName: "",
+        hostelContact: "",
+        hostelLocation: "",
+      },
+      validationSchema: bookSchema,
+      onSubmit: (values) => {
+        dispatch(bookingHostel(values));
+        resetForm();
+      },
+    });
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, []);
+
   return (
     <>
       <main className="container mt-10">
@@ -41,7 +48,7 @@ const Book = () => {
             <img src="/images/official.png" alt="booking hostel details" />
           </div>
 
-          <div className="border w-full md:w-1/2 py-10">
+          <div className="border rounded-xl w-full md:w-1/2 py-10">
             <form onSubmit={handleSubmit}>
               <div className="flex items-center flex-col">
                 <label className="hostelLabel">Username</label>

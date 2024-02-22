@@ -105,9 +105,7 @@ const Navbar = () => {
                     <ul className="my-2">
                       {setToken ? (
                         <>
-                          <li className="dropdown p-3" onClick={handleLogout}>
-                            Logout
-                          </li>
+                          
                           <li className="dropdown p-3 ">
                             {" "}
                             <NavLink to="/hostel/search?q=all">Hostel</NavLink>
@@ -120,6 +118,10 @@ const Navbar = () => {
                               {" "}
                               Host your hostel
                             </NavLink>
+                          </li>
+
+                          <li className="dropdown p-3" onClick={handleLogout}>
+                            Logout
                           </li>
                         </>
                       ) : (

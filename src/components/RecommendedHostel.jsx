@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { recommendedHostel } from "../features/UserDetailSlice";
 import {
   Button,
@@ -35,7 +35,7 @@ const RecommendedHostel = () => {
   if (loading) {
     return <h1>Loading...</h1>;
   }
- 
+
   return (
     <>
       <main className="container mt-10">
@@ -97,6 +97,16 @@ const RecommendedHostel = () => {
           ) : (
             <h1>No Hostel Found</h1>
           )}
+
+          <div>
+            {
+              searchItem && (
+                <Button>
+              <NavLink to="/hostel/search?q=all">View More</NavLink>
+            </Button>
+              )
+            }
+          </div>
         </div>
       </main>
     </>

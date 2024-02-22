@@ -23,8 +23,6 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-
-
 export const registerUser = createAsyncThunk(
   "registerUser",
   async (data, { rejectWithValue }) => {
@@ -128,25 +126,43 @@ export const hostelDetail = createAsyncThunk(
   }
 );
 
-
 export const bookingHostel = createAsyncThunk(
   "bookingHostel",
-  async(data,{rejectWithValue})=>{
+  async (data, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:5000/api/hostel/book",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
+      const response = await fetch("http://localhost:5000/api/hostel/book", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-        body:JSON.stringify(data)
-      })
+        body: JSON.stringify(data),
+      });
       return response.ok;
-      } catch (error) {
-      return rejectWithValue({message:error.message});
-      
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
     }
   }
-)
+);
+
+export const tokenData = createAsyncThunk(
+  "tokenData",
+  async (data, { rejectWithValue }) => {
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/usertoken", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${data}`,
+        },
+      });
+
+      const result = await response.json();
+      console.log(result);
+      return result;
+    } catch (error) {
+      return rejectWithValue({ message: error.message });
+    }
+  }
+);
 
 const initialState = {
   token: localStorage.getItem("token") || null,
@@ -155,7 +171,8 @@ const initialState = {
   searchItem: [],
   contentpush: false,
   hostelInfo: [],
-  response : false,
+  response: false,
+  userItem: [],
 };
 
 const userDetailSlice = createSlice({
@@ -248,6 +265,17 @@ const userDetailSlice = createSlice({
         state.response = action.payload;
       })
       .addCase(bookingHostel.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(tokenData.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(tokenData.fulfilled, (state, action) => {
+        state.loading = false;
+        state.userItem = action.payload;
+      })
+      .addCase(tokenData.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });
