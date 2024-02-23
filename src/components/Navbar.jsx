@@ -4,16 +4,18 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { NavLink } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Search from "./Search";
+import { clearUser } from "../features/UserDetailSlice";
 
 const Navbar = () => {
   const [login, setLogin] = useState(false);
   const [register, setRegister] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [detailHostel, setDetailHostel] = useState(false);
 
-  const { token, contentpush } = useSelector((state) => state.userDetail);
+  const { token } = useSelector((state) => state.userDetail);
+
+  const dispatch = useDispatch();
 
   const handleLogin = () => {
     setLogin(!login);
@@ -32,13 +34,9 @@ const Navbar = () => {
     setRegister(false);
   };
 
-  const handleHostel = () => {
-    setDetailHostel(!detailHostel);
-  };
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    window.location.reload();
+    dispatch(clearUser());
   };
 
   const setToken = !!token;

@@ -16,7 +16,9 @@ import {
 } from "@chakra-ui/react";
 
 const RecommendedHostel = () => {
-  const { searchItem, loading } = useSelector((state) => state.userDetail);
+  const { searchItem, loading, token } = useSelector(
+    (state) => state.userDetail
+  );
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -35,6 +37,11 @@ const RecommendedHostel = () => {
   if (loading) {
     return <h1>Loading...</h1>;
   }
+
+  const handleViewMore=()=>{
+    
+  }
+
 
   return (
     <>
@@ -81,14 +88,14 @@ const RecommendedHostel = () => {
                         Book Now
                       </Button>
                       <Button
-                        variant="ghost"
-                        colorScheme="blue"
-                        onClick={() => {
-                          handleDetail(hostel._id);
-                        }}
-                      >
-                        View Details
-                      </Button>
+                          variant="ghost"
+                          colorScheme="blue"
+                          onClick={() => {
+                            handleDetail(hostel._id);
+                          }}
+                        >
+                          View Details
+                        </Button>
                     </ButtonGroup>
                   </CardFooter>
                 </Card>
@@ -98,14 +105,18 @@ const RecommendedHostel = () => {
             <h1>No Hostel Found</h1>
           )}
 
-          <div>
-            {
-              searchItem && (
+          <div className="flex justify-center items-center ">
+            {searchItem && (
+              token ? (
                 <Button>
-              <NavLink to="/hostel/search?q=all">View More</NavLink>
-            </Button>
+                <NavLink to="/hostel/search?q=all">View More</NavLink>
+              </Button>
+              ):(
+                <Button onClick={handleViewMore}>
+                <NavLink  >View More</NavLink>
+              </Button>
               )
-            }
+            )}
           </div>
         </div>
       </main>

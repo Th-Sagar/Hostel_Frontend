@@ -165,6 +165,15 @@ export const tokenData = createAsyncThunk(
   }
 );
 
+export const clearUser =createAsyncThunk(
+  "clearUser",
+  ()=>{
+    localStorage.removeItem("token");
+    return false;
+  }
+  
+)
+
 const initialState = {
   token: localStorage.getItem("token") || null,
   loading: false,
@@ -277,6 +286,17 @@ const userDetailSlice = createSlice({
         state.userItem = action.payload;
       })
       .addCase(tokenData.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload.message;
+      })
+      .addCase(clearUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(clearUser.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token=null;
+      })
+      .addCase(clearUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload.message;
       });
