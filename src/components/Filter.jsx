@@ -2,8 +2,8 @@ import React from 'react'
 
 const Filter = ({handlePrice,handleStars}) => {
   return (
-    <section className=" w-full text-center sm:w-1/6 border-r-0 sm:border-r">
-            <div className="mt-20">
+    <section className=" w-full text-center sm:w-1/6 border-r-0 md:border-r ">
+            <div className="md:mt-20">
               <h1 className="font-bold text-2xl">Rating</h1>
               <div className="mt-2">
                 <div>
@@ -53,7 +53,7 @@ const Filter = ({handlePrice,handleStars}) => {
                 </div>
               </div>
             </div>
-            <hr className="my-10"/>
+            <hr className="my-10 "/>
 
             <div >
               <h1 className="font-bold text-2xl">Price</h1>
@@ -65,7 +65,9 @@ const Filter = ({handlePrice,handleStars}) => {
                     value={1}
                     onChange={handlePrice}
                   />
-                  <label className="rating-label">1000</label>
+                  <label className="rating-label">
+                    
+                  1000</label>
                 </div>
                 <div>
                   <input

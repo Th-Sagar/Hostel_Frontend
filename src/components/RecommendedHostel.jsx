@@ -14,6 +14,9 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
+import {toast} from 'react-toastify';
+
+import { Star } from "./Star";
 
 const RecommendedHostel = () => {
   const { searchItem, loading, token } = useSelector(
@@ -39,18 +42,18 @@ const RecommendedHostel = () => {
   }
 
   const handleViewMore=()=>{
-    
+    toast.error("Please Login to View More Hostels");
+
+
   }
-
-
   return (
     <>
-      <main className="container mt-10">
+      <main className="container mt-5">
         <div className=" place-items-center grid md:grid-cols-2 lg:grid-cols-3 mt-10 ">
           {Array.isArray(searchItem) && searchItem.length > 0 ? (
             searchItem.map((hostel, index) => {
               return (
-                <Card maxW="sm" key={index} className="my-10">
+                <Card maxW="sm" key={index} className="mb-10">
                   <CardBody>
                     <Image
                       src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
@@ -58,9 +61,14 @@ const RecommendedHostel = () => {
                       borderRadius="lg"
                     />
                     <Stack mt="6" spacing="3">
+                    <div className="flex justify-between">
                       <Heading size="md" className="capitalize">
                         {hostel.hostelName}
                       </Heading>
+                      <div className="flex">
+                        <Star value={hostel.hostelRating} />
+                      </div>{" "}
+                    </div>
                       <Text className="capitalize text-lg ">
                         {hostel.hostelDescription}
                       </Text>
@@ -105,20 +113,25 @@ const RecommendedHostel = () => {
             <h1>No Hostel Found</h1>
           )}
 
-          <div className="flex justify-center items-center ">
+         
+        </div>
+
+        <div className="flex justify-center items-center ">
             {searchItem && (
               token ? (
                 <Button>
                 <NavLink to="/hostel/search?q=all">View More</NavLink>
               </Button>
               ):(
-                <Button onClick={handleViewMore}>
+               <>
+                <Button disabled onClick={handleViewMore}>
                 <NavLink  >View More</NavLink>
               </Button>
+               </>
               )
             )}
           </div>
-        </div>
+        
       </main>
     </>
   );
