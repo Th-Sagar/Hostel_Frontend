@@ -190,10 +190,10 @@ const SearchData = () => {
         </section>
         <hr className=" my-10" />
 
-        <div className="flex gap-6 flex-wrap md:flex-nowrap justify-center mt-10 ">
+        <div className="flex gap-6 flex-wrap md:flex-nowrap justify-center mt-10 w-full ">
           <Filter handlePrice={handlePrice} handleStars={handleStars} />
 
-          <div className="flex flex-wrap justify-center items-center gap-7 ">
+          <div className="flex flex-wrap w-full md: md:w-5/6 justify-center items-center gap-7 ">
             { currentHostels.map((hostel, index) => {
               return (
                 <Card

@@ -2,7 +2,7 @@ import React from 'react'
 
 const Filter = ({handlePrice,handleStars}) => {
   return (
-    <section className=" w-full text-center sm:w-1/6 border-r-0 md:border-r ">
+    <section className=" w-full  md:w-1/6 text-center  border-r-0 md:border-r ">
             <div className="md:mt-20">
               <h1 className="font-bold text-2xl">Rating</h1>
               <div className="mt-2">
