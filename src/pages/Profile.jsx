@@ -46,8 +46,8 @@ const Profile = () => {
 
   return (
     <>
-      <main className="container flex  justify-between items-center gap-6 md:gap-0 md:flex-row flex-col">
-        <section className="md:w-1/2 md:fixed left-0 top-20 md:h-screen md:overflow-y-auto">
+      <main className="container flex  justify-between gap-6 md:gap-0 md:flex-row flex-col">
+        <section className="md:w-1/2 sticky left-0 top-20 h-fit">
           <div className="flex justify-center items-center">
             <header className="border px-20 mt-10 pt-10 rounded-xl">
               <div>
