@@ -6,7 +6,7 @@ const Footer = () => {
   const year = new Date().getFullYear();
   return (
     <>
-      <footer className="mt-20 stikcy">
+      <footer className="mt-20 sticky">
         <main className=" grid md:grid-cols-3 list-none bg-gray-300  items-center py-10 text-center ">
           <div className="pl-4 break-words md:w-64">
             <p className="text-sm">
